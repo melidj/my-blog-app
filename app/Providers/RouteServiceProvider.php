@@ -34,6 +34,20 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::redirect('/', '/home');
+
+        Route::middleware(['auth'])->group(function(){
+            Route::get('/home', function(){
+                if(auth()->user()->isAdmin()){
+                    return redirect()->route('admin.dashboard');
+                } elseif(auth()->user()->isBlogger()){
+                    return redirect()->route('');
+                }else{
+                    return redirect()->route('');
+                }
+            })->name('home');
+        });
     }
 
     /**
@@ -45,4 +59,6 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
+
+    
 }

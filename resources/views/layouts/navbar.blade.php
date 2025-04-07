@@ -45,7 +45,7 @@
 
     
     <footer class="text-center text-sm text-gray-500 py-4">
-        &copy; {{ date('Y') }} My Blog.
+        &copy; {{ date('Y') }} My Blog. All rights reserved.
     </footer>
 
 
