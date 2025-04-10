@@ -26,6 +26,12 @@
       </div>
   
       <div class="mt-5">
+
+        <div class="container me-2">
+          @if(session('success'))
+              <div class="alert alert-success">{{ session('success') }}</div>
+          @endif
+        </div>
         
         {{-- <button type="button" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none ">
           <svg class="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
@@ -39,7 +45,8 @@
   
         <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 ">Or</div>--}}
         <!-- Form -->
-        <form>
+        <form action="{{ route('login') }}" method="POST">
+          @csrf
           <div class="grid gap-y-4">
             <!-- Form Group -->
             <div>

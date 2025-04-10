@@ -9,32 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if(Auth::attempt($credentials, $request->remember)){
-            $request->session()->regenerate();
-            return redirect()->intended('/');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-    }
 
     public function showRegisterForm()
     {
         return view('auth.register');
     }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -47,11 +27,59 @@ class AuthController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'commenter', 
         ]);
 
-        Auth::login($user);
-
-        return redirect('/');
+        return redirect()->route('login')->with('success', 'Registration successful! Please login');
+        
     }
+
+
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            
+            $user = Auth::user();
+
+            return redirect()->intended(
+                match($user->role){
+                    'admin' => route('admin.dashboard'),
+                    'blogger' => route('blogger.dashboard'),
+                    default => route('commenter.dashboard')
+                }
+            );
+
+            
+            
+        }
+
+        return back()->withErrors([
+            'email' => 'Invalid credentials!',
+        ])->onlyInput('email');
+
+        
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate(); // data remove here
+        $request->session()->regenerate(); // csrf regenerate
+
+        return redirect('/login')->with('warning', 'You have been logged out.');
+    }
+
+    
 }

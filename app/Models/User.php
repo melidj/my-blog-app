@@ -24,23 +24,6 @@ class User extends Authenticatable
         'role'
     ];
 
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-    public function isBlogger()
-    {
-        return $this->role === 'blogger';
-    }
-
-    public function isCommenter()
-    {
-        return $this->role === 'commenter';
-    }
-
-
-
 
 
 
