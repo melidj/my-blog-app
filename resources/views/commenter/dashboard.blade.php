@@ -101,6 +101,31 @@
       <!-- End Card -->
     </div>
     <!-- End Grid -->
+
+    <div class="relative overflow-hidden">
+      <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+        <div class="text-center">
+          <h1 class="text-4xl sm:text-6xl font-bold text-gray-800">
+            Upgrade to Blogger
+          </h1>
+    
+          <p class="mt-3 text-gray-600">
+            Ready to share your stories with the world? Upgrade your account to publish your own posts and reach a wider audience.
+          </p>
+
+          <div class="mt-8 mb-6">
+            <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 
+            hover:from-blue-700 hover:to-violet-700 shadow-lg hover:shadow-blue-700/30 border border-transparent text-white text-lg font-medium 
+            rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 py-3 px-8 transition-all duration-300" href="{{ route('request.blogger') }}">
+              Upgrade
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
   </div>
   <!-- End Card Blog -->
 

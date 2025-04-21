@@ -43,7 +43,8 @@ Route::middleware('auth', 'blogger')->group(function () {
 Route::middleware('auth', 'commenter')->group(function () {
     Route::get('/commenter/dashboard', [CommenterController::class, 'dashboard'])->name('commenter.dashboard');
 
-    //can add more
+    Route::get('/request-blogger', [CommenterController::class, 'showUpgradeForm'])->name('request.blogger');
+    Route::post('/request-blogger', [CommenterController::class, 'upgradeToBlogger'])->name('submit.blogger');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
