@@ -36,8 +36,11 @@ Route::middleware('auth', 'admin')->group(function () {
 
 Route::middleware('auth', 'blogger')->group(function () {
     Route::get('/blogger/dashboard', [BloggerController::class, 'dashboard'])->name('blogger.dashboard');
-
-    //can add more
+    Route::get('/blogger/create', [BloggerController::class, 'create'])->name('blogger.create');
+    Route::post('/blogger/create', [BloggerController::class, 'store'])->name('blogger.store');
+    Route::get('/blogger/myposts', [BloggerController::class, 'myposts'])->name('blogger.myposts');
+    Route::get('/blogger/{id}/edit', [BloggerController::class, 'edit'])->name('blogger.edit');
+    Route::put('/blogger/{id}/edit', [BloggerController::class, 'update'])->name('blogger.update');
 });
 
 Route::middleware('auth', 'commenter')->group(function () {
