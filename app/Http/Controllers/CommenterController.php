@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class CommenterController extends Controller
 {
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        return view('commenter.dashboard');
+        $categories = Category::all();
+        $selectedCategory = request('category');
+    
+        $posts = Post::with('category')
+            ->when($selectedCategory, function ($query) use ($selectedCategory) {
+                return $query->whereHas('category', function ($q) use ($selectedCategory) {
+                    $q->where('slug', $selectedCategory);
+                });
+            })
+            ->latest()
+            ->paginate(6);
+    
+        return view('commenter.dashboard', compact('posts', 'categories', 'selectedCategory'));
     }
 
     public function showUpgradeForm()
@@ -28,14 +42,23 @@ class CommenterController extends Controller
             'categories' => 'required|array',
         ]);
 
+        $user = Auth::user();
 
-        Auth::user()->update([
+        $user->update([
             'blogger_name' => $request->blogger_name,
             'bio' => $request->bio,
             'role' => 'blogger',
         ]);
 
         return redirect()->route('blogger.dashboard');
+    }
+
+    public function show(Post $post)
+    {
+        return view('commenter.show', [
+            'post' => $post,
+            'categories' => Category::all()
+        ]);
     }
     
 }

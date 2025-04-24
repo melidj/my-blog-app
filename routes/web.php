@@ -48,6 +48,7 @@ Route::middleware('auth', 'commenter')->group(function () {
 
     Route::get('/request-blogger', [CommenterController::class, 'showUpgradeForm'])->name('request.blogger');
     Route::post('/request-blogger', [CommenterController::class, 'upgradeToBlogger'])->name('submit.blogger');
+    Route::get('posts/{id}', [CommenterController::class, 'show'])->name('commenter.show');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

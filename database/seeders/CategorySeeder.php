@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
@@ -19,5 +20,7 @@ class CategorySeeder extends Seeder
             ['name' => 'Technology', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Lifestyle', 'created_at' => now(), 'updated_at' => now()],
         ]);
+
+        
     }
 }
