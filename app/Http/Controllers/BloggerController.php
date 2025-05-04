@@ -136,4 +136,10 @@ class BloggerController extends Controller
 
 
     }
+
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('blogger.show', compact('post'));
+    }
 }

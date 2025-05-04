@@ -126,7 +126,7 @@
     
                     <tbody class="divide-y divide-gray-200">
                         @forelse ($post as $item)
-                            <tr class="bg-white hover:bg-gray-50" onclick="window.location=''" style="cursor: pointer;"> 
+                            <tr class="bg-white hover:bg-gray-50" onclick="window.location='{{ route('blogger.show', $item->id) }}'" style="cursor: pointer;"> 
 
                               {{-- {{ route('posts.show', $item->id) }} --}}
 

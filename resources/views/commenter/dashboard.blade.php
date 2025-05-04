@@ -59,7 +59,7 @@
                 {{ $post->title }}
             </h3>
             <p class="mt-3 text-gray-600">
-                {{ $post->excerpt }}
+              {{ Str::limit($post->content, 90) }}
             </p>
             <p class="mt-4 inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 group-hover:underline group-focus:underline font-medium">
                 Read more

@@ -41,6 +41,8 @@ Route::middleware('auth', 'blogger')->group(function () {
     Route::get('/blogger/myposts', [BloggerController::class, 'myposts'])->name('blogger.myposts');
     Route::get('/blogger/{id}/edit', [BloggerController::class, 'edit'])->name('blogger.edit');
     Route::put('/blogger/{id}/edit', [BloggerController::class, 'update'])->name('blogger.update');
+    Route::get('/blogger/{id}', [BloggerController::class, 'show'])->name('blogger.show');
+
 });
 
 Route::middleware('auth', 'commenter')->group(function () {

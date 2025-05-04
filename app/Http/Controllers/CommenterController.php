@@ -50,7 +50,7 @@ class CommenterController extends Controller
             'role' => 'blogger',
         ]);
 
-        return redirect()->route('blogger.dashboard');
+        return redirect()->route('blogger.dashboard')->with('success', 'You are now a Blogger!');
     }
 
     public function show(Post $post)

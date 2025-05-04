@@ -10,12 +10,10 @@ class BloggerMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() || Auth::user()->role === 'blogger') {
-            
+        if (auth()->check() && auth()->user()->role === 'blogger') {
             return $next($request);
-            
         }
-
-        abort(403, 'Unauthorized action.');
+    
+        return redirect('commenter.dashboard');
     }
 }
